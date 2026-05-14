@@ -14,6 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     typeEffect();
 
+    // === MOBILE MENU TOGGLE ===
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (menuToggle && navLinks) {
+        // Toggle menu open/close when hamburger is clicked
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+        // Close menu when clicking anywhere outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('open');
+            }
+        });
+    }
+
     // === NAVBAR SCROLL ===
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
