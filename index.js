@@ -60,22 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === ACTIVE NAV LINK ===
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navAnchors = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
-        navLinks.forEach(a => {
+        navAnchors.forEach(a => {
             a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
     }, { passive: true });
-
-    // === MOBILE MENU ===
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinksEl = document.getElementById('nav-links');
-    if (menuToggle && navLinksEl) {
-        menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
-        navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
-    }
 
     // === SCROLL REVEAL ===
     const revealObserver = new IntersectionObserver(entries => {
